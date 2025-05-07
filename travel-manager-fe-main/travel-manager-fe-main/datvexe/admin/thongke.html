@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thống kê</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+      /* Để chứa nút được định vị bên trong */
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .stat {
+      display: flex;
+      justify-content: space-around;
+      margin: 20px 0;
+    }
+
+    .stat div {
+      background: #e0e0e0;
+      padding: 15px;
+      border-radius: 5px;
+      flex: 1;
+      text-align: center;
+      margin: 0 10px;
+    }
+
+    .stat div h2 {
+      margin: 0;
+      color: #333;
+    }
+
+    .chart {
+      margin-top: 20px;
+    }
+
+    .chart canvas {
+      width: 100%;
+      height: 400px;
+    }
+
+    .back-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .back-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <a href="QLKH.html" class="back-button">Back</a> <!-- Nút Back -->
+
+    <h1>Thống kê dữ liệu</h1>
+
+    <div class="stat">
+      <div>
+        <h2>Số người dùng</h2>
+        <p id="user_total"></p>
+      </div>
+      <div>
+        <h2>Doanh thu tổng</h2>
+        <p id="revenue_total"></p>
+      </div>
+      <div>
+        <h2>Số vé</h2>
+        <p id="ticket_total"></p>
+      </div>
+      <div>
+        <h2>Tuyến đường</h2>
+        <p id="route_total"></p>
+      </div>
+    </div>
+    <div class="chart">
+      <canvas id="revenueChart"></canvas>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      fetch('http://127.0.0.1:8000/api/dashboard')
+        .then(response => response.json())
+        .then(data => {
+          if (data.status) {
+            document.getElementById('user_total').textContent = data.data.user_total;
+            document.getElementById('revenue_total').textContent = data.data.revenue_total;
+            document.getElementById('ticket_total').textContent = data.data.ticket_total;
+            document.getElementById('route_total').textContent = data.data.route_total;
+
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const chartData = {
+              labels: Object.keys(data.data.revenues),
+              datasets: [{
+                label: 'Doanh thu theo tháng',
+                data: Object.values(data.data.revenues),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+              }]
+            };
+
+            new Chart(ctx, {
+              type: 'bar',
+              data: chartData,
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+          } else {
+            console.error('Failed to load data');
+          }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    });
+  </script>
+</body>
+
+</html>

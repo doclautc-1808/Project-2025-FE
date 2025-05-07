@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Car Detail Left Sidebar</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="img/Xe/logo.png" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i,900,900i%7CMerriweather:300,300i,400,400i,700,700i,900,900i"
+    rel="stylesheet">
+
+  <!-- Bootstrap Stylesheet -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <!-- Font Awesome Stylesheet -->
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+
+  <!-- Custom Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" id="cpswitch" href="css/orange.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Date-Picker Stylesheet -->
+  <link rel="stylesheet" href="css/datepicker.css">
+
+  <!-- Slick Stylesheet -->
+  <link rel="stylesheet" href="css/slick.css">
+  <link rel="stylesheet" href="css/slick-theme.css">
+</head>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+  function thongbao() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Đặt vé thành công',
+      showConfirmButton: false,
+      timer: 1250
+    })
+  }</script>
+
+<body>
+
+
+  <!-- Page Scripts Starts -->
+  <script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var email = urlParams.get('email');
+    var token = urlParams.get("token");
+
+    // Lưu giá trị 'email' vào cookie
+    if (email) {
+      sessionStorage.setItem("email", email);
+      sessionStorage.setItem("token", token);
+
+      console.log('Đã lưu email vào cookie:', email);
+    } else {
+      console.log('Không tìm thấy giá trị email trong URL.');
+    }
+    window.location.href = "index.html"
+  </script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/slick.min.js"></script>
+  <script src="js/custom-navigation.js"></script>
+  <script src="js/custom-date-picker.js"></script>
+  <script src="js/custom-slick.js"></script>
+  <!-- Page Scripts Ends -->
+</body>
+
+</html>

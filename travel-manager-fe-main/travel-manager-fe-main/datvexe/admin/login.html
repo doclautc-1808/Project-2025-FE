@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login AdminDashboard</title>
+  <link rel="icon" href="../img/Xe/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body id="particles-js">
+
+  <div class="animated bounceInDown">
+    <div class="container">
+      <!-- <span class="error animated tada" id="msg"></span> -->
+
+      <form method="post" class="box" id="loginForm">
+        <h4>Admin<span>Dashboard</span></h4>
+        <h5>Đăng nhập vào tài khoản của bạn.</h5>
+
+
+        <input type="text" name="email" placeholder="Email" required>
+        <i class="typcn typcn-eye" id="eye"></i>
+        <input type="password" name="password" placeholder="Passsword" id="pwd" required>
+
+        <a href="quenmk.html" style="text-decoration: none;" class="forgetpass">Quên mật khẩu?</a>
+        <button name="dangnhap" class="btn1">ĐĂNG NHẬP</button>
+      </form>
+
+    </div>
+
+  </div>
+  <script src="js/login.js"></script>
+</body>
+
+</html>

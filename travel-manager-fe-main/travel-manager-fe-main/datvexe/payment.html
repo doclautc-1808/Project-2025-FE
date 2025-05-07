@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Payment Page</title>
+</head>
+
+<body>
+  <script>
+    function processPayment() {
+      // Lấy các tham số từ URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const totalAmount = urlParams.get('total_amount');
+      const userId = urlParams.get('user_id');
+      const scheduleId = urlParams.get('schedule_id');
+      const seatIds = urlParams.get('seat_ids').split(','); // Convert to array
+      const departureDate = urlParams.get('departure_date');
+      const pickupLocation = urlParams.get('pickup_location');
+      const customerName = urlParams.get('customer_name');
+      const phoneNumber = urlParams.get('phone_number');
+      const email = urlParams.get('email');
+      const email_user = urlParams.get('email_user');
+      const token = urlParams.get('token');
+
+      const bookingData = {
+        user_id: userId,
+        schedule_id: scheduleId,
+        seat_ids: seatIds.map(id => parseInt(id)), // Convert to number
+        departure_date: departureDate,
+        pickup_location: pickupLocation,
+        customer_name: customerName,
+        phone_number: phoneNumber,
+        email: email,
+        total_amount: totalAmount,
+        method: "MOMO"
+      };
+      sessionStorage.setItem("email", email_user);
+      sessionStorage.setItem("token", token);
+
+      // Thực hiện API booking
+      fetch('http://127.0.0.1:8000/api/schedule/booking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+        },
+        body: JSON.stringify(bookingData)
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status) {
+            // Chuyển hướng đến trang thanh toán MoMo
+            window.location.href = "lichsu.html";
+          } else {
+            console.error("Error booking:", data.message);
+          }
+        })
+        .catch(error => {
+          console.error("Error:", error);
+        });
+    }
+
+    // Khởi động xử lý thanh toán khi trang được tải
+    window.onload = processPayment;
+  </script>
+</body>
+
+</html>

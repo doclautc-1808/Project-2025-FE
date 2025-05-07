@@ -1,0 +1,119 @@
+.seat-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 35%;
+}
+
+.seat {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  cursor: pointer;
+}
+
+.seat input {
+  display: none;
+}
+.seat_test{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.seat-icon {
+  font-size: 14px;
+  color: #333;
+  z-index: 10;
+}
+
+.seat::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  right: 5px;
+  bottom: 0;
+  background-color: #ccc;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  z-index: 1;
+}
+
+.seat::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  background-color: #999;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 1;
+}
+
+.seat.available::before {
+  background-color: #8ee28e;
+}
+
+.seat.unavailable::before {
+  background-color: #d8a0a0;
+}
+
+.seat.available:hover::before {
+  background-color: #46f246;
+}
+
+.seat input:checked + .seat-icon::before {
+  background-color: #5eb15e;
+}
+
+.seat.unavailable {
+  cursor: not-allowed;
+}
+
+.seat.unavailable .seat-icon {
+  color: #999;
+}
+
+.seat.available {
+  background-color: #e0ffe0;
+}
+
+.seat.unavailable {
+  background-color: #ffe0e0;
+  cursor: not-allowed;
+}
+
+.seat.available:hover {
+  background-color: #c0ffc0;
+}
+
+.seat input:checked + .seat_test {
+  background-color: #0eea0e;
+}
+
+.seat.unavailable .seat-icon {
+  color: #999;
+}
+
+.seat-row {
+  display: flex;
+  gap: 10px;
+}
+
+.seat {
+  margin: 0 5px;
+  border-radius: 10px;
+}
+
+
